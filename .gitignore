@@ -7,13 +7,6 @@ __pycache__/
 *.py[cod]
 .ipynb_checkpoints/
 
-# Data direktori (hanya track file template/placeholder, jangan upload video besar)
-data/raw/daisee_sample/*.mp4
-data/raw/daisee_sample/*.avi
-data/augmented/*
-data/compressed/*
-data/watermarked/*
-
 # OS generated
 .DS_Store
 Thumbs.db
