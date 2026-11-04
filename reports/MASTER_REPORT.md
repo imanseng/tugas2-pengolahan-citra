@@ -1,6 +1,6 @@
-# Laporan Tugas 2: Pemrosesan Citra Tingkat Lanjut - Data Augmentation, Image Compression, dan Digital Watermarking
+# Laporan Tugas 2: Pemrosesan Gambar Tingkat Lanjut - Data Augmentation, Image Compression, dan Digital Watermarking
 
-> **Mata Kuliah**: Pengolahan Citra Digital  
+> **Mata Kuliah**: Pengolahan Gambar Digital  
 > **Penyusun**: Iman Dwi Satrio, Ahmad Zaidan  
 > **Institusi**: Program Studi Informatika / Ilmu Komputer  
 > **Tautan Repositori GitHub**: [tugas2-pengolahan-citra](https://github.com/imandwisatrio/tugas2-pengolahan-citra)  
@@ -14,7 +14,7 @@
 ## Daftar Isi Lengkap
 
 1. [Bab 1: Pendahuluan dan Latar Belakang Terpadu](#bab-1-pendahuluan-dan-latar-belakang-terpadu)
-   - 1.1 Urgensi Pemrosesan Citra Tingkat Lanjut
+   - 1.1 Urgensi Pemrosesan Gambar Tingkat Lanjut
    - 1.2 Keterkaitan Tiga Pilar: Variasi Model, Efisiensi Transmisi, dan Perlindungan Hak Cipta
    - 1.3 Tujuan Proyek dan Lingkup Eksperimen
 2. [Bab 2: Bagian A - Pipeline Data Augmentation pada Video Dataset E-Learning (DAiSEE)](#bab-2-bagian-a---pipeline-data-augmentation-pada-video-dataset-e-learning-daisee)
@@ -26,10 +26,10 @@
    - 2.6 Implementasi Teknis dan Visualisasi Matriks 10x6
    - 2.7 Analisis Hasil dan Pembahasan Bagian A
 3. [Bab 3: Bagian B - Analisis Komparatif Algoritma Image Compression dan Benchmarking Kuantitatif](#bab-3-bagian-b---analisis-komparatif-algoritma-image-compression-dan-benchmarking-kuantitatif)
-   - 3.1 Teori Redundansi Data Citra Digital
+   - 3.1 Teori Redundansi Data Gambar Digital
    - 3.2 Analogi Konseptual dan Rangkuman Mendalam 10 Algoritma Kompresi
    - 3.3 Tabel Komparasi Komprehensif 10 Teknik Kompresi
-   - 3.4 Kajian Khusus: Perlakuan & Rasterisasi Citra Vektor (SVG)
+   - 3.4 Kajian Khusus: Perlakuan & Rasterisasi Gambar Vektor (SVG)
    - 3.5 Metodologi Implementasi 3 Teknik Terpilih (RLE, JPEG DCT, WebP)
    - 3.6 Tabel Rekapitulasi Hasil Benchmarking Multi-Format
    - 3.7 Visualisasi Kuantitatif dan Perbandingan Visual Hasil Rekonstruksi
@@ -54,16 +54,16 @@
 
 ## Bab 1: Pendahuluan dan Latar Belakang Terpadu
 
-### 1.1 Urgensi Pemrosesan Citra Tingkat Lanjut
-Perkembangan pesat teknologi digital dan kecerdasan buatan (*Artificial Intelligence*) telah menjadikan citra dan video digital sebagai media komunikasi utama di seluruh sektor peradaban manusia—mulai dari platform pembelajaran daring (*e-learning*), rekam medis diagnostik, kendaraan otonom, hingga transaksi komersial digital. Meskipun demikian, pengelolaan data visual skala besar menghadapi tiga tantangan rekayasa mendasar:
-1. **Kebutuhan Data Latih yang Kaya dan Tangguh (*Data Diversity*)**: Model pembelajaran mesin mendalam (*Deep Learning* / CNN) membutuhkan variasi data yang luas dan bebas bias agar dapat melakukan generalisasi akurat di dunia nyata.
-2. **Kendala Bandwidth Transmisi dan Media Penyimpanan (*Data Efficiency*)**: Resolusi citra mentah yang sangat tinggi membutuhkan volume penyimpanan besar dan bandwidth transmisi yang berat jika tidak dikompresi secara cerdas.
+### 1.1 Urgensi Pemrosesan Gambar Tingkat Lanjut
+Perkembangan pesat teknologi digital dan kecerdasan buatan (*Artificial Intelligence*) telah menjadikan gambar dan video digital sebagai media komunikasi utama di seluruh sektor peradaban manusia mulai dari platform pembelajaran daring (*e-learning*), rekam medis diagnostik, kendaraan otonom, hingga transaksi komersial digital. Meskipun demikian, pengelolaan data visual skala besar menghadapi tiga tantangan rekayasa mendasar:
+1. **Kebutuhan Data Latih yang Tangguh (*Data Diversity*)**: Model pembelajaran mesin mendalam (*Deep Learning* / CNN) membutuhkan variasi data yang luas dan bebas bias agar dapat melakukan generalisasi akurat di dunia nyata.
+2. **Kendala Bandwidth Transmisi dan Media Penyimpanan (*Data Efficiency*)**: Resolusi gambar mentah yang sangat tinggi membutuhkan volume penyimpanan besar dan bandwidth transmisi yang berat jika tidak dikompresi secara cerdas.
 3. **Perlindungan Integritas dan Hak Kekayaan Intelektual (*Copyright & Security*)**: Keterbukaan jaringan digital memicu risiko pembajakan, penyalinan tanpa izin, dan manipulasi konten secara masif.
 
 ### 1.2 Keterkaitan Tiga Pilar: Variasi Model, Efisiensi Transmisi, dan Perlindungan Hak Cipta
 Ketiga pilar utama di atas saling melengkapi dan membentuk siklus hidup utuh data visual modern:
 - **Bagian A (Data Augmentation)** menyasar tahap *hulu* (pelatihan model visi komputer), memastikan model kecerdasan buatan mampu mengenali ekspresi siswa dengan tangguh terhadap variasi kondisi nyata.
-- **Bagian B (Image Compression)** menyasar tahap *distribusi* (jaringan dan penyimpanan), mereduksi ukuran citra secara drastis melalui pemangkasan redundansi data tanpa merusak persepsi visual pengguna.
+- **Bagian B (Image Compression)** menyasar tahap *distribusi* (jaringan dan penyimpanan), mereduksi ukuran gambar secara drastis melalui pemangkasan redundansi data tanpa merusak persepsi visual pengguna.
 - **Bagian C (Digital Watermarking)** menyasar tahap *keamanan dan kepemilikan* (hukum dan integritas), menyisipkan tanda air tak kasatmata yang kebal terhadap manipulasi kompresi dan transmisi guna membuktikan keaslian hak cipta.
 
 ```
@@ -79,7 +79,7 @@ Ketiga pilar utama di atas saling melengkapi dan membentuk siklus hidup utuh dat
 ```
 
 ### 1.3 Tujuan Proyek dan Lingkup Eksperimen
-Proyek ini dirancang secara komprehensif untuk mengeksplorasi, mengimplementasikan, dan mengevaluasi secara kuantitatif ketiga pilar pemrosesan citra digital tersebut melalui implementasi kode modular, visualisasi grafis, benchmarking terukur, dan pembahasan ilmiah mendalam berstandar akademik.
+Proyek ini dirancang secara komprehensif untuk mengeksplorasi, mengimplementasikan, dan mengevaluasi secara kuantitatif ketiga pilar pemrosesan gambar digital tersebut melalui implementasi kode modular, visualisasi grafis, benchmarking terukur, dan pembahasan ilmiah mendalam berstandar akademik.
 
 ---
 
@@ -137,8 +137,8 @@ Visualisasi komparatif grid $10 \times 6$ disajikan pada gambar berikut:
 
 ## Bab 3: Bagian B - Analisis Komparatif Algoritma Image Compression dan Benchmarking Kuantitatif
 
-### 3.1 Teori Redundansi Data Citra Digital
-Kompresi citra bertujuan mereduksi jumlah bit representasi dengan memangkas empat jenis redundansi: spasial (korelasi antar piksel tetangga), spektral (korelasi antar kanal warna), psikovisual (ketidakpekaan sistem penglihatan manusia terhadap frekuensi tinggi), dan entropi (pengkodean simbol berbobot tidak seimbang).
+### 3.1 Teori Redundansi Data Gambar Digital
+Kompresi gambar bertujuan mereduksi jumlah bit representasi dengan memangkas empat jenis redundansi: spasial (korelasi antar piksel tetangga), spektral (korelasi antar kanal warna), psikovisual (ketidakpekaan sistem penglihatan manusia terhadap frekuensi tinggi), dan entropi (pengkodean simbol berbobot tidak seimbang).
 
 ### 3.2 Analogi Konseptual dan Rangkuman Mendalam 10 Algoritma Kompresi
 1. **RLE (Lossless)**: Seperti mencatat "100 piksel putih berturut-turut" daripada menulis "putih" 100 kali. *Ref: Robinson & Cherry (1967), DOI: 10.1109/PROC.1967.5493*.
@@ -167,7 +167,7 @@ Kompresi citra bertujuan mereduksi jumlah bit representasi dengan memangkas empa
 | **9** | **Vector Quant.** | Lossy | Pemetaan blok ke codevector codebook LBG | $10:1 - 25:1$ | Distorsi tepi blok | Encoding Berat, Decoding Cepat | Video Konferensi Lama | Gray (1984), DOI: [10.1109/MASSP.1984.1162229](https://doi.org/10.1109/MASSP.1984.1162229) |
 | **10**| **Fractal IFS** | Lossy | Transformasi kontraktif self-similarity | $20:1 - 80:1$ | Halus saat diperbesar | Encoding Ekstrem, Decoding Cepat | Riset Fraktal Alami | Jacquin (1992), DOI: [10.1109/5.127835](https://doi.org/10.1109/5.127835) |
 
-### 3.4 Kajian Khusus: Perlakuan & Rasterisasi Citra Vektor (SVG)
+### 3.4 Kajian Khusus: Perlakuan & Rasterisasi Gambar Vektor (SVG)
 Berkas SVG tersusun atas instruksi teks XML murni berukuran hanya $\approx 894\text{ Bytes}$. Agar dapat diproses oleh algoritma kompresi citra raster (RLE, JPEG, WebP), berkas SVG dirasterisasi secara deterministik ke resolusi $512 \times 512 \times 3$ uint8 ($768\text{ KB}$). Lonjakan data dari $0.89\text{ KB}$ menjadi $768\text{ KB}$ adalah konsekuensi alamiah dari konversi instruksi geometri kontinu ke kisi piksel diskrit.
 
 ### 3.5 Metodologi Implementasi 3 Teknik Terpilih
@@ -212,7 +212,7 @@ Berkas SVG tersusun atas instruksi teks XML murni berukuran hanya $\approx 894\t
 
 ---
 
-## Bab 4: Bagian C - Implementasi Digital Image Watermarking dan Uji Robustness terhadap Serangan Citra
+## Bab 4: Bagian C - Implementasi Digital Image Watermarking dan Uji Robustness terhadap Serangan Gambar
 
 ### 4.1 Definisi dan Taksonomi Digital Watermarking
 Watermarking menyisipkan sinyal sekunder ke dalam data gambar utama (*host image*) untuk pembuktian hak cipta. Diklasifikasikan menjadi:
